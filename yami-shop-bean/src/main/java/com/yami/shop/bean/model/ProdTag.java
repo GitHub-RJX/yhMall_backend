@@ -33,7 +33,7 @@ public class ProdTag implements Serializable {
      */
     private Long shopId;
     /**
-     * 状态(1为正常,0为删除)
+     * 状态(1为启用,0为禁用)
      */
     private Integer status;
     /**
