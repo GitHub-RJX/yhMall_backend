@@ -19,12 +19,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
- * @date 2022/3/25 17:33
  * @author lh
+ * @date 2022/3/25 17:33
  */
 @Component
 public class PasswordCheckManager {
-
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -38,24 +37,25 @@ public class PasswordCheckManager {
      * 检查用户输入错误的验证码次数
      */
     private static final String CHECK_VALID_CODE_NUM_PREFIX = "checkUserInputErrorPassword_";
-    public void checkPassword(SysTypeEnum sysTypeEnum,String userNameOrMobile, String rawPassword, String encodedPassword) {
+
+    public void checkPassword(SysTypeEnum sysTypeEnum, String userNameOrMobile, String rawPassword, String encodedPassword) {
 
         String checkPrefix = sysTypeEnum.value() + CHECK_VALID_CODE_NUM_PREFIX + IpHelper.getIpAddr();
 
         int count = 0;
-        if(RedisUtil.hasKey(checkPrefix + userNameOrMobile)){
+        if (RedisUtil.hasKey(checkPrefix + userNameOrMobile)) {
             count = RedisUtil.get(checkPrefix + userNameOrMobile);
         }
-        if(count > TIMES_CHECK_INPUT_PASSWORD_NUM){
+        if (count > TIMES_CHECK_INPUT_PASSWORD_NUM) {
             throw new YamiShopBindException("密码输入错误十次，已限制登录30分钟");
         }
         // 半小时后失效
-        RedisUtil.set(checkPrefix + userNameOrMobile,count,1800);
+        RedisUtil.set(checkPrefix + userNameOrMobile, count, 1800);
         // 密码不正确
-        if (StrUtil.isBlank(encodedPassword) || !passwordEncoder.matches(rawPassword,encodedPassword)){
+        if (StrUtil.isBlank(encodedPassword) || !passwordEncoder.matches(rawPassword, encodedPassword)) {
             count++;
             // 半小时后失效
-            RedisUtil.set(checkPrefix + userNameOrMobile,count,1800);
+            RedisUtil.set(checkPrefix + userNameOrMobile, count, 1800);
             throw new YamiShopBindException("账号或密码不正确");
         }
     }

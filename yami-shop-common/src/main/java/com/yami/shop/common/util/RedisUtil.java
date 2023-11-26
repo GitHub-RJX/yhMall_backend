@@ -1,13 +1,3 @@
-/*
- * Copyright (c) 2018-2999 广州市蓝海创新科技有限公司 All rights reserved.
- *
- * https://www.mall4j.com/
- *
- * 未经允许，不可做商业用途！
- *
- * 版权所有，侵权必究！
- */
-
 package com.yami.shop.common.util;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,14 +8,11 @@ import org.springframework.util.CollectionUtils;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author lh
- */
 @Slf4j
 public class RedisUtil {
     private static RedisTemplate<String, Object> redisTemplate = SpringContextUtils.getBean("redisTemplate", RedisTemplate.class);
 
-    public static final StringRedisTemplate STRING_REDIS_TEMPLATE = SpringContextUtils.getBean("stringRedisTemplate",StringRedisTemplate.class);
+    public static final StringRedisTemplate STRING_REDIS_TEMPLATE = SpringContextUtils.getBean("stringRedisTemplate", StringRedisTemplate.class);
 
     //=============================common============================
 

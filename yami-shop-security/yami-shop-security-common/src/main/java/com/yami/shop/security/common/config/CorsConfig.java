@@ -6,16 +6,14 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-/**
- * @author yami
- */
 @Configuration
 public class CorsConfig {
 
     /**
-     *  修改为添加而不是设置，* 最好生产环境改为实际的需要， 这里可以用多个add配置多个域名
-     *  configuration.addAllowedOrigin("http://localhost:8080");
-     *  configuration.addAllowedOrigin("http://192.168.1.6:8080");
+     * 修改为添加而不是设置，* 最好生产环境改为实际的需要， 这里可以用多个add配置多个域名
+     * configuration.addAllowedOrigin("http://localhost:8080");
+     * configuration.addAllowedOrigin("http://192.168.1.6:8080");
+     *
      * @return CorsConfigurationSource
      */
     @Bean

@@ -45,13 +45,13 @@ public class AttachFileServiceImpl extends ServiceImpl<AttachFileMapper, AttachF
 
     @Autowired
     private AttachFileMapper attachFileMapper;
-    //    @Autowired
-//    private UploadManager uploadManager;
+    @Autowired
+    private UploadManager uploadManager;
     @Autowired
     private BucketManager bucketManager;
     @Autowired
     private Qiniu qiniu;
-    //    @Autowired
+//    @Autowired
 //    private Auth auth;
     @Autowired
     private ImgUploadUtil imgUploadUtil;

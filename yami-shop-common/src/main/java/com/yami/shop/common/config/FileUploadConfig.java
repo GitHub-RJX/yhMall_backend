@@ -16,8 +16,6 @@ import java.util.Objects;
 
 /**
  * 文件上传配置
- *
- * @author lgh
  */
 @Configuration
 public class FileUploadConfig {
@@ -55,8 +53,6 @@ public class FileUploadConfig {
 
     /**
      * 认证信息实例
-     *
-     * @return
      */
     @Bean
     public Auth auth() {

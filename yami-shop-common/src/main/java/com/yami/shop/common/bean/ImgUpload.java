@@ -14,7 +14,7 @@ public class ImgUpload {
 	private String imagePath;
 
 	/**
-	 * 文件上传方式 1.本地文件上传 2.七牛云
+	 * 文件上传方式 1.本地文件上传 2.阿里云
 	 */
 	private Integer uploadType;
 

@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 /**
  * 正则表达式工具
- * @author LGH
  */
 public class PrincipalUtil {
 
@@ -26,14 +25,14 @@ public class PrincipalUtil {
     public static final String SIMPLE_CHAR_REGEXP = "([a-z0-9]+)";
 
     public static boolean isMobile(String value) {
-        if(StrUtil.isBlank(value)) {
+        if (StrUtil.isBlank(value)) {
             return false;
         }
         return Pattern.matches(MOBILE_REGEXP, value);
     }
 
     public static boolean isUserName(String value) {
-        if(StrUtil.isBlank(value)) {
+        if (StrUtil.isBlank(value)) {
             return false;
         }
         return Pattern.matches(USER_NAME_REGEXP, value);
@@ -48,6 +47,7 @@ public class PrincipalUtil {
 
     /**
      * 是否是由简单的字母数字拼接而成的字符串
+     *
      * @param value 输入值
      * @return 匹配结果
      */

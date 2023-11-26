@@ -1,12 +1,3 @@
-/*
- * Copyright (c) 2018-2999 广州市蓝海创新科技有限公司 All rights reserved.
- *
- * https://www.mall4j.com/
- *
- * 未经允许，不可做商业用途！
- *
- * 版权所有，侵权必究！
- */
 package com.yami.shop.security.common.config;
 
 import com.anji.captcha.model.common.CaptchaTypeEnum;
@@ -28,6 +19,7 @@ import java.util.Properties;
 
 /**
  * 这里把验证码的底图存入redis中，如果报获取验证码失败找管理员什么的可以看下redis的情况
+ *
  * @author 菠萝凤梨
  * @date 2022/3/25 17:33
  */
@@ -59,7 +51,7 @@ public class CaptchaConfig {
             Resource[] var4 = resources;
             int var5 = resources.length;
 
-            for(int var6 = 0; var6 < var5; ++var6) {
+            for (int var6 = 0; var6 < var5; ++var6) {
                 Resource resource = var4[var6];
                 byte[] bytes = FileCopyUtils.copyToByteArray(resource.getInputStream());
                 String string = Base64Utils.encodeToString(bytes);

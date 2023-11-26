@@ -1,12 +1,3 @@
-/*
- * Copyright (c) 2018-2999 广州市蓝海创新科技有限公司 All rights reserved.
- *
- * https://www.mall4j.com/
- *
- * 未经允许，不可做商业用途！
- *
- * 版权所有，侵权必究！
- */
 package com.yami.shop.security.common.filter;
 
 import cn.dev33.satoken.stp.StpUtil;
@@ -30,14 +21,12 @@ import org.springframework.util.AntPathMatcher;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.List;
 
 /**
  * 授权过滤，只要实现AuthConfigAdapter接口，添加对应路径即可：
- *
- * @author 菠萝凤梨
- * @date 2022/3/25 17:33
  */
 @Component
 public class AuthFilter implements Filter {
@@ -95,8 +84,7 @@ public class AuthFilter implements Filter {
                     return;
                 }
                 userInfoInToken = tokenStore.getUserInfoByAccessToken(accessToken, true);
-            }
-            else if (!mayAuth) {
+            } else if (!mayAuth) {
                 // 返回前端401
                 httpHandler.printServerResponseToWeb(ServerResponseEntity.fail(ResponseEnum.UNAUTHORIZED));
                 return;
@@ -106,7 +94,7 @@ public class AuthFilter implements Filter {
 
             chain.doFilter(req, resp);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             // 手动捕获下非controller异常
             if (e instanceof YamiShopBindException) {
                 httpHandler.printServerResponseToWeb((YamiShopBindException) e);

@@ -18,11 +18,13 @@ import org.springframework.stereotype.Component;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 /**
  * 一些简单的安全过滤：
  * xss
+ *
  * @author lgh
  */
 @Component
@@ -35,14 +37,13 @@ public class XssFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException{
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-
-        logger.info("uri:{}",req.getRequestURI());
+        logger.info("uri:{}", req.getRequestURI());
         // xss 过滤
-		chain.doFilter(new XssWrapper(req), resp);
+        chain.doFilter(new XssWrapper(req), resp);
     }
 
     @Override

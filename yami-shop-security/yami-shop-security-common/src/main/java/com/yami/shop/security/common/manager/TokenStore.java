@@ -1,12 +1,3 @@
-/*
- * Copyright (c) 2018-2999 广州市蓝海创新科技有限公司 All rights reserved.
- *
- * https://www.mall4j.com/
- *
- * 未经允许，不可做商业用途！
- *
- * 版权所有，侵权必究！
- */
 package com.yami.shop.security.common.manager;
 
 import cn.dev33.satoken.stp.StpUtil;
@@ -49,6 +40,7 @@ public class TokenStore {
 
     /**
      * 以Sa-Token技术生成token，并返回token信息
+     *
      * @param userInfoInToken
      * @return
      */
@@ -78,6 +70,7 @@ public class TokenStore {
 
     /**
      * 计算过期时间（单位:秒）
+     *
      * @param sysType
      * @return
      */
@@ -97,30 +90,32 @@ public class TokenStore {
 
     /**
      * 根据accessToken 获取用户信息
+     *
      * @param accessToken accessToken
      * @param needDecrypt 是否需要解密
      * @return 用户信息
      */
     public UserInfoInTokenBO getUserInfoByAccessToken(String accessToken, boolean needDecrypt) {
         if (StrUtil.isBlank(accessToken)) {
-            throw new YamiShopBindException(ResponseEnum.UNAUTHORIZED,"accessToken is blank");
+            throw new YamiShopBindException(ResponseEnum.UNAUTHORIZED, "accessToken is blank");
         }
         String keyName = OauthCacheNames.USER_INFO + accessToken;
         Object redisCache = redisTemplate.opsForValue().get(keyName);
         if (redisCache == null) {
-            throw new YamiShopBindException(ResponseEnum.UNAUTHORIZED,"登录过期，请重新登录");
+            throw new YamiShopBindException(ResponseEnum.UNAUTHORIZED, "登录过期，请重新登录");
         }
         return JSON.parseObject(redisCache.toString(), UserInfoInTokenBO.class);
     }
 
     /**
      * 刷新token，并返回新的token
+     *
      * @param refreshToken
      * @return
      */
     public TokenInfoBO refreshToken(String refreshToken) {
         if (StrUtil.isBlank(refreshToken)) {
-            throw new YamiShopBindException(ResponseEnum.UNAUTHORIZED,"refreshToken is blank");
+            throw new YamiShopBindException(ResponseEnum.UNAUTHORIZED, "refreshToken is blank");
         }
         // 删除旧token
         UserInfoInTokenBO userInfoInTokenBO = getUserInfoByAccessToken(refreshToken, false);
@@ -149,11 +144,12 @@ public class TokenStore {
 
     /**
      * 生成token，并返回token展示信息
+     *
      * @param userInfoInToken
      * @return
      */
     public TokenInfoVO storeAndGetVo(UserInfoInTokenBO userInfoInToken) {
-        if (!userInfoInToken.getEnabled()){
+        if (!userInfoInToken.getEnabled()) {
             // 用户已禁用，请联系客服
             throw new YamiShopBindException("yami.user.disabled");
         }
@@ -168,6 +164,7 @@ public class TokenStore {
 
     /**
      * 删除当前登录的token
+     *
      * @param accessToken 令牌
      */
     public void deleteCurrentToken(String accessToken) {
@@ -180,8 +177,9 @@ public class TokenStore {
 
     /**
      * 生成各系统唯一uid
+     *
      * @param sysType 系统类型
-     * @param userId 用户id
+     * @param userId  用户id
      * @return
      */
     private String getUid(String sysType, String userId) {
