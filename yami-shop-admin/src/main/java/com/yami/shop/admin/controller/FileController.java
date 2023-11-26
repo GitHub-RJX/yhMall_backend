@@ -16,8 +16,6 @@ import java.util.Objects;
 
 /**
  * 文件上传 controller
- *
- * @author lgh
  */
 @RestController
 @RequestMapping("/admin/file")

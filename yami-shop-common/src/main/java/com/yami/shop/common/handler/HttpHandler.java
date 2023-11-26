@@ -13,14 +13,11 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Objects;
 
-/**
- * @author 菠萝凤梨
- * @date 2022/3/28 14:15
- */
 @Component
 public class HttpHandler {
 
@@ -53,8 +50,7 @@ public class HttpHandler {
         try {
             printWriter = response.getWriter();
             printWriter.write(objectMapper.writeValueAsString(serverResponseEntity));
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new YamiShopBindException("io 异常", e);
         }
     }

@@ -25,3 +25,10 @@ xxl-job:
   logPath: /data/applogs/xxl-job/jobhandler
   admin:
     addresses: http://localhost:8080/xxl-job-admin
+aliyun:
+  oss:
+    file:
+      endpoint: oss-cn-beijing.aliyuncs.com
+      keyid: LTAI5tCZVBGzLkfCrmrZKXFC
+      keysecret: eu4B5mnS14BbEGuqKTHNWj1AEehNCX
+      bucketname: rjx-yhmall

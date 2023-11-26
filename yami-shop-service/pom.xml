@@ -22,5 +22,9 @@
             <artifactId>yami-shop-common</artifactId>
             <version>${yami.shop.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+        </dependency>
     </dependencies>
 </project>
