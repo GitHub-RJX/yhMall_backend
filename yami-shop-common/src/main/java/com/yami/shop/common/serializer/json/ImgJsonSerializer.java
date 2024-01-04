@@ -18,8 +18,10 @@ public class ImgJsonSerializer extends JsonSerializer<String> {
 
     @Autowired
     private ImgUploadUtil imgUploadUtil;
-    //    @Autowired
-//    private Qiniu qiniu;
+
+    @Autowired
+    private Qiniu qiniu;
+
     @Value("${shop.aLiDaYu.resourcesUrl}")
     private String ossResourceUrl;
 

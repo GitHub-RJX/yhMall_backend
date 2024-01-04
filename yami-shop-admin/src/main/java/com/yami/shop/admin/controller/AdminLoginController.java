@@ -27,16 +27,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * @author FrozenWatermelon
- * @date 2020/6/30
- */
 @RestController
 @Tag(name = "登录")
 public class AdminLoginController {
@@ -60,7 +57,7 @@ public class AdminLoginController {
     private PasswordManager passwordManager;
 
     @PostMapping("/adminLogin")
-    @Operation(summary = "账号密码 + 验证码登录(用于后台登录)" , description = "通过账号/手机号/用户名密码登录")
+    @Operation(summary = "账号密码 + 验证码登录(用于后台登录)", description = "通过账号/手机号/用户名密码登录")
     public ServerResponseEntity<?> login(
             @Valid @RequestBody CaptchaAuthenticationDTO captchaAuthenticationDTO) {
         // 登陆后台登录需要再校验一遍验证码
@@ -78,10 +75,10 @@ public class AdminLoginController {
 
         // 半小时内密码输入错误十次，已限制登录30分钟
         String decryptPassword = passwordManager.decryptPassword(captchaAuthenticationDTO.getPassWord());
-        passwordCheckManager.checkPassword(SysTypeEnum.ADMIN,captchaAuthenticationDTO.getUserName(), decryptPassword, sysUser.getPassword());
+        passwordCheckManager.checkPassword(SysTypeEnum.ADMIN, captchaAuthenticationDTO.getUserName(), decryptPassword, sysUser.getPassword());
 
         // 不是店铺超级管理员，并且是禁用状态，无法登录
-        if (Objects.equals(sysUser.getStatus(),0)) {
+        if (Objects.equals(sysUser.getStatus(), 0)) {
             // 未找到此用户信息
             throw new YamiShopBindException("未找到此用户信息");
         }
@@ -103,13 +100,13 @@ public class AdminLoginController {
         List<String> permsList;
 
         //系统管理员，拥有最高权限
-        if(userId == Constant.SUPER_ADMIN_ID){
+        if (userId == Constant.SUPER_ADMIN_ID) {
             List<SysMenu> menuList = sysMenuService.list(Wrappers.emptyWrapper());
             permsList = menuList.stream().map(SysMenu::getPerms).collect(Collectors.toList());
-        }else{
+        } else {
             permsList = sysUserService.queryAllPerms(userId);
         }
-        return permsList.stream().flatMap((perms)->{
+        return permsList.stream().flatMap((perms) -> {
                     if (StrUtil.isBlank(perms)) {
                         return null;
                     }

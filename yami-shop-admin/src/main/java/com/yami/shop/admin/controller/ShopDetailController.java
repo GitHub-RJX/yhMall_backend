@@ -21,9 +21,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author lgh on 2018/08/29.
- */
 @RestController
 @RequestMapping("/shop/shopDetail")
 public class ShopDetailController {

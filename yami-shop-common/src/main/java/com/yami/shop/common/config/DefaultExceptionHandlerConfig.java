@@ -1,13 +1,3 @@
-/*
- * Copyright (c) 2018-2999 广州市蓝海创新科技有限公司 All rights reserved.
- *
- * https://www.mall4j.com/
- *
- * 未经允许，不可做商业用途！
- *
- * 版权所有，侵权必究！
- */
-
 package com.yami.shop.common.config;
 
 import com.yami.shop.common.exception.YamiShopBindException;
@@ -28,14 +18,13 @@ import java.util.List;
 
 /**
  * 自定义错误处理器
- * @author LGH
  */
 @Slf4j
 @Controller
 @RestControllerAdvice
 public class DefaultExceptionHandlerConfig {
 
-    @ExceptionHandler({ MethodArgumentNotValidException.class, BindException.class })
+    @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class})
     public ResponseEntity<ServerResponseEntity<List<String>>> methodArgumentNotValidExceptionHandler(Exception e) {
         log.error("methodArgumentNotValidExceptionHandler", e);
         List<FieldError> fieldErrors = null;
@@ -59,19 +48,19 @@ public class DefaultExceptionHandlerConfig {
     }
 
     @ExceptionHandler(YamiShopBindException.class)
-    public ResponseEntity<ServerResponseEntity<?>> unauthorizedExceptionHandler(YamiShopBindException e){
+    public ResponseEntity<ServerResponseEntity<?>> unauthorizedExceptionHandler(YamiShopBindException e) {
         log.error("mall4jExceptionHandler", e);
 
         ServerResponseEntity<?> serverResponseEntity = e.getServerResponseEntity();
-        if (serverResponseEntity!=null) {
+        if (serverResponseEntity != null) {
             return ResponseEntity.status(HttpStatus.OK).body(serverResponseEntity);
         }
         // 失败返回消息 状态码固定为直接显示消息的状态码
-        return ResponseEntity.status(HttpStatus.OK).body(ServerResponseEntity.fail(e.getCode(),e.getMessage()));
+        return ResponseEntity.status(HttpStatus.OK).body(ServerResponseEntity.fail(e.getCode(), e.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ServerResponseEntity<Object>> exceptionHandler(Exception e){
+    public ResponseEntity<ServerResponseEntity<Object>> exceptionHandler(Exception e) {
         log.error("exceptionHandler", e);
         return ResponseEntity.status(HttpStatus.OK).body(ServerResponseEntity.fail(ResponseEnum.EXCEPTION));
     }

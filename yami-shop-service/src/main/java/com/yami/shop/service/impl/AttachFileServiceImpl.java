@@ -51,8 +51,8 @@ public class AttachFileServiceImpl extends ServiceImpl<AttachFileMapper, AttachF
     private BucketManager bucketManager;
     @Autowired
     private Qiniu qiniu;
-//    @Autowired
-//    private Auth auth;
+    @Autowired
+    private Auth auth;
     @Autowired
     private ImgUploadUtil imgUploadUtil;
 
@@ -118,4 +118,18 @@ public class AttachFileServiceImpl extends ServiceImpl<AttachFileMapper, AttachF
             throw new RuntimeException(e);
         }
     }
+
+//    @Override
+//    public void deleteFile(String fileName) {
+//        attachFileMapper.delete(new LambdaQueryWrapper<AttachFile>().eq(AttachFile::getFilePath, fileName));
+//        try {
+//            if (Objects.equals(imgUploadUtil.getUploadType(), 1)) {
+//                imgUploadUtil.delete(fileName);
+//            } else if (Objects.equals(imgUploadUtil.getUploadType(), 2)) {
+//                bucketManager.delete(qiniu.getBucket(), fileName);
+//            }
+//        } catch (QiniuException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }
